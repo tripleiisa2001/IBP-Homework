@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>student regiter</title>
+</head>
+<body>
+    <h2>Student Registration Form</h2>
+    <form action="register.php" method="POST">
+      <label for="full_name">Full Name:</label>
+      <input type="text" id="full_name" name="full_name" required><br><br>
+  
+      <label for="email">Email Address:</label>
+      <input type="email" id="email" name="email" required><br><br>
+  
+      <label for="gender">Gender:</label>
+      <input type="radio" id="male" name="gender" value="Male" required>
+      <label for="male">Male</label>
+      <input type="radio" id="female" name="gender" value="Female" required>
+      <label for="female">Female</label><br><br>
+  
+      <input type="submit" value="Submit">
+      <?php
+$host = 'localhost';
+$db = 'your_database_name';
+$user = 'your_username';
+$password = 'your_password';
+
+
+$conn = mysqli_connect($host, $user, $password, $db);
+if (!$conn) {
+  die('Failed to connect to database: ' . mysqli_connect_error());
+}
+
+
+$query = "SELECT * FROM students";
+$result = mysqli_query($conn, $query);
+
+
+if (mysqli_num_rows($result) > 0) {
+  echo '<h2>Registered Students:</h2>';
+  echo '<table>';
+  echo '<tr><th>ID</th><th>Full Name</th><th>Email</th><th>Gender</th></tr>';
+  while ($row = mysqli_fetch_assoc($result)) {
+    echo '<tr>';
+    echo '<td>' . $row['id'] . '</td>';
+    echo '<td>' . $row['full_name'] . '</td>';
+    echo '<td>' . $row['email'] . '</td>';
+    echo '<td>' . $row['gender'] . '</td>';
+    echo '</tr>';
+ 
+
+    </form>
+    
+</body>
+</html>
